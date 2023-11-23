@@ -1,0 +1,200 @@
+﻿@model KeyGem.ViewModel.EditUserModel
+@{
+    ViewBag.Title = "New";
+}
+
+<link rel="stylesheet" href="~/AdminLte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href=".~/AdminLte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+<link rel="stylesheet" href="~/AdminLte/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+<link rel="stylesheet" href="~/Content/toastr.css" />
+
+
+<div class="content-header">
+    <div class="container-fluid">
+        <h2>Edit User</h2>
+    </div>
+</div>
+@using (Html.BeginForm("UpdateEmail", "Account", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <h3>Change Detail</h3>
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+<div class="row">
+    <div class="col-6">
+        <div class="form-group">
+            @Html.LabelFor(m => m.Email)
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Email)
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="form-group">
+            <div class="mb-3">
+                @Html.LabelFor(m => m.RoleName, new { @class = "form-label" })
+                @Html.DropDownListFor(m => m.RoleName, new SelectList(Model.Roles, "name", "name"), "Select user role", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.RoleName)
+            </div>
+        </div>
+    </div>
+</div>
+    
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.PersonName)
+                @Html.TextBoxFor(m => m.PersonName, new { id = "personName", @class = "form-control", Value = Model.PersonName, @readonly = "readonly" })
+                @Html.ValidationMessage("")
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.PhoneNumber)
+                @Html.TextBoxFor(m => m.PhoneNumber, new { id = "phoneNumber", @class = "form-control", Value = Model.PhoneNumber, @readonly = "readonly" })
+                @Html.ValidationMessage("")
+                <button type="button" class="btn btn-danger" style="margin-top: 20px; padding-left: 30px; padding-right: 30px" id="clearPerson">Clear Person</button>
+            </div>
+        </div>
+    </div>
+    @Html.HiddenFor(m => m.Id)
+    <section class="content">
+        <div class="container-fluid">
+
+            <table id="person" class="table table-bordered table-hover display">
+                <thead>
+                    <tr>
+                        <th>
+                            Person
+                        </th>
+                        <th>
+                            Phone Number
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <button type="submit" class="btn btn-success" style="margin-top: 20px; padding-left: 30px; padding-right: 30px">Save</button>
+
+}
+
+@using (Html.BeginForm("ChangePassword", "Account", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <h3 style="margin-top: 20px">Change Password</h3>
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.NewPassword)
+                @Html.TextBoxFor(m => m.NewPassword, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.NewPassword)
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.ConfirmNewPassword)
+                @Html.TextBoxFor(m => m.ConfirmNewPassword, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.ConfirmNewPassword)
+            </div>
+        </div>
+    </div>
+    @Html.HiddenFor(m => m.Id)
+    <button type="submit" class="btn btn-success" style="margin-top: 20px; padding-left: 30px; padding-right: 30px; margin-bottom: 50px">Save</button>
+    <button type="button" class="btn btn-danger" style="margin-top: 20px; padding-left: 30px; padding-right: 30px; margin-bottom: 50px" onclick="location.href='@Url.Action("Index", "Account")'">Cancel</button>
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(document).ready(function () {
+            var table = $("#person").DataTable({
+                ajax: {
+                    url: "/api/person/",
+                    dataSrc: ""
+                },
+                columns:
+                    [
+                        {
+                            data: null,
+                            render: function (data, type, row) {
+                                var fullName = row.firstName + " " + row.lastName;
+
+                                return fullName;
+                            }
+                        },
+                        {
+                            data: "phone"
+                        },
+                    ],
+                rowCallback: function (row, data) {
+                    $(row).on('click', function () {
+                        $('#personName').val(data.firstName + ' ' + data.lastName);
+                        $('#phoneNumber').val(data.phone);
+                    });
+                }
+            });
+
+            $("#person").on("click", ".js-edit", function () {
+                var button = $(this);
+                window.location.href = "/person/edit/" + button.attr("data-person-id");
+            });
+
+            $("#person ").on("click", ".js-delete", function () {
+                var button = $(this);
+                bootbox.confirm("Are you sure you want to delete this person?", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/api/person/" + button.attr("data-person-id"),
+                            method: "DELETE",
+                            success: function () {
+                                table.row(button.parents("tr")).remove().draw();
+                            }
+                        });
+                    }
+                });
+
+
+            });
+
+            $('#clearPerson').click(function () {
+                $('#personName').val(null);
+                $('#phoneNumber').val(null);
+            });
+        });
+    </script>
+    @if (TempData["EditUserSuccess"] != null)
+    {
+        <script>
+            $(document).ready(function () {
+                toastr.success("Password successfully changed");
+            });
+        </script>
+    }
+    <script src="~/AdminLte/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/AdminLte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/AdminLte/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/AdminLte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="~/AdminLte/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/AdminLte/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="~/AdminLte/plugins/jszip/jszip.min.js"></script>
+    <script src="~/AdminLte/plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="~/AdminLte/plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="~/AdminLte/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="~/AdminLte/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="~/AdminLte/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+}
+<style>
+    .field-validation-error {
+        color: red;
+    }
+
+    .input-validation-error {
+        border: 2px solid red;
+    }
+</style>

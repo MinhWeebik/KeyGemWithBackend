@@ -1,0 +1,58 @@
+﻿@model KeyGem.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_MainPageLayout.cshtml";
+}
+
+@section headSection
+{
+    <title>Create Account</title>
+    <link rel="stylesheet" href="~/Content/MainPageResources/css/login/login-body.css" />
+    <link rel="stylesheet" href="~/Content/MainPageResources/css/create-account/create-account-body.css" />
+}
+
+
+
+<div class="main-body-register">
+    <h1 class="h1">REGISTER</h1>
+    <p class="p1">Please fill in the information below:</p>
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        if (TempData["RegisterError"] != null)
+        {
+            <div class="error-message email-user" style="width: 388px">
+                @TempData["RegisterError"]
+            </div>
+            <br />
+        }
+        <div class="email-user">
+            <input type="email" id="3" placeholder="Email" name="Email" value="@Model.Email" />
+            <label for="3"> Email </label>
+        </div>
+        <br />
+        <div class="password-create">
+            <input type="password" id="4" placeholder="Password" name="Password" value="@Model.Password" />
+            <label for="4"> Password </label>
+        </div>
+        <br />
+        <div class="first-name">
+            <input type="password" id="1" placeholder="Confirm Password" required name="ConfirmPassword" value="@Model.ConfirmPassword" />
+            <label for="1"> Confirm Password </label>
+        </div>
+        <br />
+
+        <div class="create-button">
+            <button type="submit" class="custom-button" style="margin-bottom: 0px">CREATE MY ACCOUNT</button>
+        </div>
+        @Html.HiddenFor(m => m.RoleName)
+
+    }
+    <div class="first-name" style="width: 388px; ">
+        <p class="p2">Already have an account?</p>
+        <a href="@Url.Action("Login","MainPage")" class="create-acc">Login</a>
+    </div>
+
+</div>
+<script src="~/Content/MainPageResources/javascript/create-account.js"></script>
+

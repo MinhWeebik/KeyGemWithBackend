@@ -1,0 +1,101 @@
+﻿@model KeyGem.ViewModel.NewVariantViewModel
+@{
+    ViewBag.Title = "New";
+}
+
+<link rel="stylesheet" href="~/Content/toastr.css" />
+
+<div class="content-header">
+    <div class="container-fluid">
+        <h2>@Model.Title</h2>
+    </div>
+</div>
+@using (Html.BeginForm("Save", "Variant", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.Variant.Name)
+                @Html.TextBoxFor(m => m.Variant.Name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Variant.Name)
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                <div class="mb-3">
+                    @Html.LabelFor(m => m.Variant.Stock, new { @class = "form-label" })
+                    @Html.TextBoxFor(m => m.Variant.Stock, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Variant.Stock)
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                <div class="mb-3">
+                    @Html.LabelFor(m => m.Variant.Price, new { @class = "form-label" })
+                    @Html.TextBoxFor(m => m.Variant.Price, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Variant.Price)
+                </div>
+            </div>
+            <div class="mb-3">
+                <label>Image</label>
+                <input type="file" name="thumbnail" class="form-select-lg" />
+            </div>
+            @if (Model.Variant != null)
+            {
+                if (Model.Variant.ImageLink != null)
+                {
+                    <div class="col-6">
+                        <div class="form-group">
+                            <div class="mb-3">
+                                <label class="form-label">Current Image</label>
+                                <img src="@Model.Variant.ImageLink" class="img-fluid" alt="Variant image">
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+
+        @Html.HiddenFor(m => m.Variant.ProductId, new { Value = Model.ProductId })
+        @Html.HiddenFor(m => m.Variant.ImageLink)
+        @Html.Hidden("Variant.Id", (Model.Variant != null) ? Model.Variant.Id : 0)
+    </div>
+    <button type="submit" class="btn btn-success" style="margin-top: 20px; padding-left: 30px; padding-right: 30px">Save</button>
+    <button type="button" class="btn btn-danger" style="margin-top: 20px; padding-left: 30px; padding-right: 30px" onclick="location.href='@Url.Action("Index", "Variant",new {id=Model.ProductId})'">Cancel</button>
+}
+
+
+@section scripts
+{
+    @if (TempData["Success"] != null)
+    {
+        <script>
+            $(document).ready(function () {
+                toastr.success("Product successfully created");
+            });
+        </script>
+    }
+    else if (TempData["CreateVariantSuccess"] != null)
+    {
+        <script>
+            $(document).ready(function () {
+                toastr.success("Variant successfully created");
+            });
+        </script>
+    }
+    <script src="~/AdminLte/plugins/ckeditor/ckeditor.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<style>
+    .field-validation-error {
+        color: red;
+    }
+
+    .input-validation-error {
+        border: 2px solid red;
+    }
+</style>
+

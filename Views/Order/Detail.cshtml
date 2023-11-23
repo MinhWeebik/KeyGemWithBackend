@@ -1,0 +1,46 @@
+﻿@model KeyGem.Models.Order
+@{
+    ViewBag.Title = "Detail";
+}
+
+<link rel="stylesheet" href="~/AdminLte/plugins/ekko-lightbox/ekko-lightbox.css">
+
+<section class="content">
+    <div class="content-header">
+        <div class="container-fluid">
+            <h2>Order Detail</h2>
+        </div>
+    </div>
+</section>
+<div class="col-12">
+    <ul class="list-group" style="margin-bottom: 20px">
+
+
+        <li class="list-group-item"><a href="@Url.Action("Detail","Product",new {id = Model.ProductId})">Product Name: @Model.Product.Name</a></li>
+        <li class="list-group-item">Variant Name: @Model.Variant.Name - Price: @Model.Variant.Price$</li>
+        <li class="list-group-item">Customer Name: @Model.Person.FirstName @Model.Person.LastName</li>
+        <li class="list-group-item">Quantity: @Model.Quantity</li>
+        <li class="list-group-item">Total: @Model.Quantity x @Model.Variant.Price$ = @Model.TotalAmount$</li>
+        <li class="list-group-item">Order date: @Model.OrderDate.ToLongDateString()</li>
+        <li class="list-group-item">Order state: @Model.OrderState.Name</li>
+    </ul>
+</div>
+<div class="col-6">
+    <div class="form-group">
+        <label class="form-label">Product Image</label>
+        <div class="mb-3">
+
+            <img src="@Model.Variant.ImageLink" class="img-fluid" alt="Variant image">
+        </div>
+    </div>
+</div>
+
+<div class="col-12">
+    <button type="button" class="btn btn-danger" style="margin-bottom: 50px; padding-left: 30px; padding-right: 30px" onclick="location.href='@Url.Action("Index", "Order")'">Back</button>
+</div>
+
+@section scripts
+{
+    
+}
+

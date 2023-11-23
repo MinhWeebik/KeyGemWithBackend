@@ -1,0 +1,117 @@
+﻿@model KeyGem.ViewModel.ProductDetailViewModel
+@{
+    ViewBag.Title = "ProductDetail";
+    Layout = "~/Views/Shared/_MainPageLayout.cshtml";
+}
+
+@section headSection
+{
+    <title>@Model.Product.Name</title>
+}
+
+
+<div class="product-container">
+    <div class="product-image-container">
+        <div class="main-image-container">
+            
+            <div class="list-product">
+                @foreach (var variant in Model.Product.Variants)
+                {
+                    <div class="display">
+                        <img src="@variant.ImageLink"
+                             class="main-image" />
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="change-image-container-block">
+            <div class="change-image-container">
+                @for (int i = 1; i <= Model.Product.Variants.Count(); i++)
+                {
+                    <img src="@Model.Product.Variants[i-1].ImageLink"
+                         class="change-image"
+                         onclick="currentSlide(@i,@Model.Product.Variants[i-1].Id,@Model.Product.Variants[i-1].Stock)" />
+                }
+            </div>
+        </div>
+        <script type="text/javascript"
+            src="~/Content/MainPageResources/javascript/image-change.js"></script>
+    </div> 
+    <div class="product-info-container">
+        <div class="product-info-header">@Model.Product.Name</div>
+        <div class="product-price">$ @Model.Product.Variants[0].Price</div>
+        <div class="product-shipping">
+            German Sales Tax included. Sales Tax and
+            <span class="product-shipping-link">Shipping</span> will change
+            during Checkout depending on Country.
+        </div>
+            <div class="product-type-container">
+                @for(int i=1;i<=Model.Product.Variants.Count();i++)
+                {
+                    <button onclick="currentSlide(@i,@Model.Product.Variants[i-1].Id,@Model.Product.Variants[i-1].Stock)" class="product-type">@Model.Product.Variants[i-1].Name</button>
+                }
+            </div>
+        <div class="product-amount-container">
+            <div class="product-amount">
+                <div class="product-amount-minus" onclick="minusAmount()">-</div>
+                <input type="text"
+                       class="product-amount-text"
+                       onfocusout="checkAmount()" />
+                <div class="product-amount-plus" onclick="addAmount()">+</div>
+            </div>
+        </div>
+        <div class="add-to-cart-container">
+            @if (Model.Product.TotalStock == 0)
+            {
+                <button class="custom-button">
+                    SOLD OUT
+                </button>
+            }
+            else
+            {
+                <button class="custom-button" onclick="addToCart(@Model.Product.Id)">
+                    ADD TO CART
+                </button>
+            }
+        </div>
+        <div class="product-main-info-container">
+            <div class="product-main-info-header">
+                @Html.Raw(Model.Product.Description)
+            </div>
+
+        </div>
+        <div class="share-container">
+            <div class="share-text">SHARE</div>
+            <img src="~/Content/MainPageResources/logos/facebook-logo.PNG.png" class="share-logo" />
+            <img src="~/Content/MainPageResources/logos/twitter-logo.png" class="share-logo" />
+            <img src="~/Content/MainPageResources/logos/insta-logo.png" class="share-logo" />
+        </div>
+    </div>
+</div>
+<div class="you-may-also-like-container">
+    <div class="main-header">YOU MAY ALSO LIKE</div>
+    <div class="you-may-also-like-grid">
+        @foreach (var item in Model.RecommendProducts)
+        {
+            <div class="you-may-also-like-item">
+                <div class="you-may-also-like-image-container">
+                    <a href="@Url.Action("ProductDetail","MainPage",new {id = item.Id})">
+                        <img src="@item.Variants[0].ImageLink"
+                             class="you-may-also-like-image" />
+                    </a>
+                </div>
+                <div class="you-may-also-like-item-name">
+                    <a href="@Url.Action("ProductDetail","MainPage",new {id = item.Id})">@item.Name</a>
+                </div>
+                <div class="you-may-also-like-item-price">$ @item.Variants[0].Price</div>
+            </div>
+        }
+
+    </div>
+</div>
+
+<script>
+    currentSlide(1,@Model.Product.Variants[0].Id,@Model.Product.Variants[0].Stock);
+    console.log(currentVariantStock);
+</script>

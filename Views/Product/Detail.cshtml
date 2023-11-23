@@ -1,0 +1,64 @@
+﻿@model KeyGem.ViewModel.NewProductViewModel
+@{
+    ViewBag.Title = "Detail";
+}
+
+<link rel="stylesheet" href="~/AdminLte/plugins/ekko-lightbox/ekko-lightbox.css">
+
+<section class="content">
+    <div class="content-header">
+        <div class="container-fluid">
+            <h2>@Model.Product.Name</h2>
+        </div>
+    </div>
+</section>
+<div class="col-12">
+    <ul class="list-group" style="margin-bottom: 20px">
+        <li class="list-group-item">Catagory: @Model.Product.Catagory.Name</li>
+        <li class="list-group-item">Total stock: @Model.Product.TotalStock</li>
+    </ul>
+</div>
+<div class="col-12">
+    <div class="card card-primary">
+        <div class="card-header">
+            <h4 class="card-title">Item Variant</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                @foreach (var v in Model.Product.Variants)
+                {
+                    <div class="col-sm-2">
+                        <a href="@v.ImageLink" data-toggle="lightbox" data-title="Name: @v.Name - Price: @v.Price - Stock: @v.Stock" data-gallery="gallery">
+                            <img src="@v.ImageLink" class="img-fluid mb-2" alt="white sample" />
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-12">
+    <h3><b>Description</b></h3>
+    <div>
+        @Html.Raw(Model.Product.Description)
+    </div>
+</div>
+<div class="col-12">
+    <button type="button" class="btn btn-danger" style="margin-bottom: 50px; padding-left: 30px; padding-right: 30px" onclick="location.href='@Url.Action("Index", "Product")'">Back</button>
+</div>
+
+    @section scripts
+{
+        <script>
+            $(function () {
+                $(document).on('click', '[data-toggle="lightbox"]', function (event) {
+                    event.preventDefault();
+                    $(this).ekkoLightbox({
+                        alwaysShowClose: true
+                    });
+                });
+            })
+        </script>
+        <script src="~/AdminLte/plugins/ekko-lightbox/ekko-lightbox.min.js"></script>
+    }
+

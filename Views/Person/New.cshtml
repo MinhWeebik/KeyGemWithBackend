@@ -1,0 +1,74 @@
+﻿@model KeyGem.ViewModel.NewPersonViewModel
+@{
+    ViewBag.Title = "New";
+}
+
+<link rel="stylesheet" href="~/Content/toastr.css" />
+
+<div class="content-header">
+    <div class="container-fluid">
+        <h2>@Model.Title</h2>
+    </div>
+</div>
+@using (Html.BeginForm("Save", "Person"))
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.Person.FirstName)
+                @Html.TextBoxFor(m => m.Person.FirstName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Person.FirstName)
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.Person.LastName)
+                @Html.TextBoxFor(m => m.Person.LastName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Person.LastName)
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.Person.Phone)
+                @Html.TextBoxFor(m => m.Person.Phone, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Person.Phone)
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.Person.Address)
+                @Html.TextBoxFor(m => m.Person.Address, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Person.Address)
+            </div>
+        </div>
+
+        @Html.HiddenFor(m => m.Person.Id)
+
+    </div>
+    <button type="submit" class="btn btn-success" style="margin-top: 20px; padding-left: 30px; padding-right: 30px">Save</button>
+    <button type="button" class="btn btn-danger" style="margin-top: 20px; padding-left: 30px; padding-right: 30px" onclick="location.href='@Url.Action("Index", "Person")'">Cancel</button>
+}
+
+@section scripts
+{
+    @if (TempData["CreateNewPersonSuccess"] != null)
+    {
+        <script>
+            $(document).ready(function () {
+                toastr.success("Person successfully created");
+            });
+        </script>
+    }
+    <script src="~/AdminLte/plugins/ckeditor/ckeditor.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<style>
+    .field-validation-error {
+        color: red;
+    }
+
+    .input-validation-error {
+        border: 2px solid red;
+    }
+</style>

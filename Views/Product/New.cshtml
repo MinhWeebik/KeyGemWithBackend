@@ -1,0 +1,58 @@
+﻿@model KeyGem.ViewModel.NewProductViewModel
+@{
+    ViewBag.Title = "New";
+}
+
+<link rel="stylesheet" href="~/Content/toastr.css" />
+
+<div class="content-header">
+    <div class="container-fluid">
+        <h2>@Model.Title</h2>
+    </div>
+</div>
+@using (Html.BeginForm("Save", "Product"))
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.Product.Name)
+                @Html.TextBoxFor(m => m.Product.Name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Product.Name)
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                <div class="mb-3">
+                    @Html.LabelFor(m => m.Product.CatagoriesId, new { @class = "form-label" })
+                    @Html.DropDownListFor(m => m.Product.CatagoriesId, new SelectList(Model.Catagory, "Id", "name"), "Select catagory type", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Product.CatagoriesId)
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            @Html.LabelFor(m => m.Product.Description, new { @class = "form-label" })
+            @Html.TextAreaFor(m => m.Product.Description, new { @class = "ckeditor" })
+        </div>
+        @Html.HiddenFor(m => m.Product.Id)
+
+    </div>
+    <button type="submit" class="btn btn-success" style="margin-top: 20px; padding-left: 30px; padding-right: 30px">Save</button>
+    <button type="button" class="btn btn-danger" style="margin-top: 20px; padding-left: 30px; padding-right: 30px" onclick="location.href='@Url.Action("Index", "Product")'">Cancel</button>
+}
+
+@section scripts
+{
+    <script src="~/AdminLte/plugins/ckeditor/ckeditor.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<style>
+    .field-validation-error {
+        color: red;
+    }
+
+    .input-validation-error {
+        border: 2px solid red;
+    }
+</style>

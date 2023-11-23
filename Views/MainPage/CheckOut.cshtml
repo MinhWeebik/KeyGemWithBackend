@@ -1,0 +1,308 @@
+﻿@model KeyGem.ViewModel.CheckoutViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Information - KEYGEM - Checkout</title>
+    <link rel="icon" href="~/Content/MainPageResources/logos/main-logo.png" type="image/icon type" />
+    <link rel="stylesheet" href="~/Content/MainPageResources/css/checkout/check-out-body.css" />
+</head>
+<body>
+    <div class="main-information">
+        <div class="left-body">
+            <div class="inner-left-body">
+                <div class="logo-container">
+                    <a href="@Url.Action("Index","MainPage")"><img src="~/Content/MainPageResources/logos/logo.png" class="logo" /></a>
+                </div>
+                <div>
+                    <nav>
+                        <div class="text-1 text-cart">Cart</div>
+                        <div class="arrow">
+                            <img src="~/Content/MainPageResources/logos/pngwing1.com.png" class="arrow-image" />
+                        </div>
+                        <div class="text-1 text-infomation">Information</div>
+                        <div class="arrow">
+                            <img src="~/Content/MainPageResources/logos/pngwing1.com.png" class="arrow-image" />
+                        </div>
+                        <div class="text-1 other-text">Shipping</div>
+                        <div class="arrow">
+                            <img src="~/Content/MainPageResources/logos/pngwing1.com.png" class="arrow-image" />
+                        </div>
+                        <div class="text-1 other-text">Payment</div>
+                        <div class="arrow">
+                            <img src="~/Content/MainPageResources/logos/pngwing1.com.png" class="arrow-image" />
+                        </div>
+                        <div class="text-1 other-text">Review</div>
+                    </nav>
+                </div>
+                <div class="span-hint">Express checkout options</div>
+                <div class="checkout-method-container">
+                    <div class="checkout-logo-container">
+                        <img src="~/Content/MainPageResources/logos/shoppay.jpg" class="shoppay-logo" />
+                    </div>
+                    <div class="checkout-logo-container">
+                        <img src="~/Content/MainPageResources/logos/paypal.png" class="paypal-logo" />
+                    </div>
+                    <div class="checkout-logo-container">
+                        <img src="~/Content/MainPageResources/logos/pay1.png" class="pay-logo" />
+                    </div>
+                </div>
+                <div class="separator">OR</div>
+                @if (Request.IsAuthenticated)
+                {
+                    <div class="user-container">
+                        <div>
+                            <h2 class="contact">Account</h2>
+                        </div>
+
+                        <div>
+                            <div class="user-email">@Model.User.Email</div>
+                        </div>
+                        @using (Html.BeginForm("MainPageLogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <a href="javascript:document.getElementById('logoutForm').submit()" class="log-in">Log out</a>
+                        }
+                        <div class="bottom-seperator"></div>
+                    </div>
+
+                }
+                else
+                {
+
+                    <div class="contact-container">
+                        <div>
+                            <h2 class="contact">Contact</h2>
+                        </div>
+                        <div>
+                            <span class="span-hint-2">Already have an account?</span>
+                            <a href="@Url.Action("Login","MainPage")" class="log-in">Log in</a>
+                        </div>
+                    </div>
+                    <div class="email-contact">
+                        <input type="email" id="1" placeholder="Email" />
+                        <label for="1"> Email </label>
+                    </div>
+                    <div class="checkbox-container">
+                        <input type="checkbox"
+                               checked="checked"
+                               id="checkbox"
+                               class="checkbox" />
+                        <label class="container" for="checkbox">
+                            Email me with news and offers
+                        </label>
+                    </div>
+
+                }
+
+                @if (Model.Person.Id == 0)
+                {
+                    <div>
+                        <h2 class="address">Shipping address</h2>
+                    </div>
+                    <div class="country-region-select-container">
+                        <select class="country-region-select">
+                            <option class="option1">Austria</option>
+                            <option class="option1">Albania</option>
+                            <option class="option1">Australia</option>
+                            <option class="option1">Bahrain</option>
+                            <option class="option1">Belarus</option>
+                            <option class="option1">Belgium</option>
+                            <option class="option1">Bosnia & Herzegovina</option>
+                            <option class="option1">Bulgaria</option>
+                            <option class="option1">Canada</option>
+                            <option class="option1">China</option>
+                            <option class="option1">Colombia</option>
+                            <option class="option1">Croatia</option>
+                            <option class="option1">Cyprus</option>
+                            <option class="option1">Czechia</option>
+                            <option class="option1">Denmark</option>
+                            <option class="option1">Egypt</option>
+                            <option class="option1">Estonia</option>
+                            <option class="option1">Eswatini</option>
+                            <option class="option1">Faroe Islands</option>
+                            <option class="option1">Finland</option>
+                            <option class="option1">France</option>
+                            <option class="option1">Georgia</option>
+                            <option class="option1">Germany</option>
+                            <option class="option1">Gibraltar</option>
+                            <option class="option1">Greece</option>
+                            <option class="option1">Greenland</option>
+                            <option class="option1">Hong Kong SAR</option>
+                            <option class="option1">Hungary</option>
+                            <option class="option1">Iceland</option>
+                            <option class="option1">Indonesia</option>
+                            <option class="option1">Ireland</option>
+                            <option class="option1">Israel</option>
+                            <option class="option1">Italy</option>
+                            <option class="option1">Japan</option>
+                            <option class="option1">Jordan</option>
+                            <option class="option1">Kosovo</option>
+                            <option class="option1">Latvia</option>
+                            <option class="option1">Liechtensein</option>
+                            <option class="option1">Lithuania</option>
+                            <option class="option1">Luxembourg</option>
+                            <option class="option1">Malaysia</option>
+                            <option class="option1">Malta</option>
+                            <option class="option1">Moldova</option>
+                            <option class="option1">Monaco</option>
+                            <option class="option1">Montenegro</option>
+                            <option class="option1">Netherlands</option>
+                            <option class="option1">New Zealand</option>
+                            <option class="option1">North Macedonia</option>
+                            <option class="option1">Norway</option>
+                            <option class="option1">Philippines</option>
+                            <option class="option1">Poland</option>
+                            <option class="option1">Portugal</option>
+                            <option class="option1">Romania</option>
+                            <option class="option1">San Marino</option>
+                            <option class="option1">Saudi Arabia</option>
+                            <option class="option1">Serbia</option>
+                            <option class="option1">Singapore</option>
+                            <option class="option1">Slovakia</option>
+                            <option class="option1">Slovenia</option>
+                            <option class="option1">South Korea</option>
+                            <option class="option1">Spain</option>
+                            <option class="option1">Sweden</option>
+                            <option class="option1">Swizerland</option>
+                            <option class="option1">Taiwan</option>
+                            <option class="option1">Thailand</option>
+                            <option class="option1">Turkey</option>
+                            <option class="option1">United Arab Emirates</option>
+                            <option class="option1">United Kingdom</option>
+                            <option class="option1">United States</option>
+                            <option class="option1">Vatican City</option>
+                            <option class="option1" selected>Viet Nam</option>
+                        </select>
+                        <span class="info-span">Country/Region</span>
+                    </div>
+                    using (Html.BeginForm("CheckoutSave", "Account"))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="name-container">
+                            <div class="info-contact-1 first-name-contact">
+                                <input type="text" id="2" placeholder="First name" value="@Model.Person.FirstName" name="Person.FirstName" style="border-color: @TempData["Error1"]"/>
+                                <label for="2"> First name </label>
+                            </div>
+                            <div class="info-contact-1 last-name-contact">
+                                <input type="text" id="3" placeholder="Last name" value="@Model.Person.LastName" name="Person.LastName" style="border-color: @TempData["Error2"]"/>
+                                <label for="3"> Last name </label>
+                            </div>
+                        </div>
+                        <div class="info-contact-2 address-contact">
+                            <input type="text" id="4" placeholder="Address" value="@Model.Person.Address" name="Person.Address" style="border-color: @TempData["Error3"]"/>
+                            <label for="4"> Address </label>
+                        </div>
+
+                        <div class="info-contact-2 phone-contact">
+                            <input type="text" id="8" placeholder="Phone" value="@Model.Person.Phone" name="Person.Phone" style="border-color: @TempData["Error4"]"/>
+                            <label for="8"> Phone </label>
+                        </div>
+                        if(TempData["Error1"] != null || TempData["Error2"] != null || TempData["Error3"] != null || TempData["Error4"] != null)
+                        {
+                            <div class="info-contact-2 error-message-container">
+                                <div class="error-message">There was an error while adding your information</div>
+                            </div>
+                        }
+                        <div class="finish-container">
+                            <div>
+                                <a href="@Url.Action("Index","MainPage")" class="back-cart">
+                                    <img src="~/Content/MainPageResources/logos/back-to-cart.png" class="return-img" />Return
+                                    to cart
+                                </a>
+                            </div>
+                            <div>
+                                <button type="submit" class="continue-button" onclick="personId = @Model.Person.Id">Continue to Checkout</button>
+                            </div>  
+                        </div>
+                        @Html.HiddenFor(p => p.User.Id)
+                    }
+                }
+                else
+                {
+            <div class="user-container">
+                <div>
+                    <h2 class="contact">User information</h2>
+                </div>
+
+                <div>
+                    <div class="user-email">Full name: @Model.Person.FirstName @Model.Person.LastName</div>
+                    <div class="user-email">Address: @Model.Person.Address</div>
+                    <div class="user-email">Phone Number: @Model.Person.Phone</div>
+                </div>
+                @using (Html.BeginForm("DeleteUserInfo", "Account", FormMethod.Post, new { id = "removeUserInfo" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(p => p.User.Id)
+                    @Html.HiddenFor(p => p.User.PersonId)
+                    <a href="javascript:document.getElementById('removeUserInfo').submit()" class="log-in">Delete user info</a>
+                }
+                <div class="finish-container">
+                    <div>
+                        <a href="@Url.Action("Index","MainPage")" class="back-cart">
+                            <img src="~/Content/MainPageResources/logos/back-to-cart.png" class="return-img" />Return
+                            to cart
+                        </a>
+                    </div>
+                    <div>
+                        <button type="submit" class="continue-button" id="checkOutButton">Checkout</button>
+                    </div>
+                </div>
+            </div>
+                }
+
+                <div class="separator-2"></div>
+                <div class="support-container">
+                    <div>
+                        <a href="" class="support refund-policy">Refund policy</a>
+                    </div>
+                    <div>
+                        <a href="shipping-policy.html" class="support shipping-policy">Shipping policy</a>
+                    </div>
+                    <div>
+                        <a href="" class="support privacy-policy">Privacy policy</a>
+                    </div>
+                    <div>
+                        <a href="" class="support terms-of-service">Terms of service</a>
+                    </div>
+                    <div>
+                        <a href="" class="support legal-notice">Legal notice</a>
+                    </div>
+                    <div>
+                        <a href="Contactus.html" class="support legal-notice">Contact information</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="right-body">
+            <div class="check-out-item-container"></div>
+            <div class="gift-discount">
+                <input type="text" id="9" placeholder="Gift card or discount code" />
+                <label for="9"> Gift card or discount code </label>
+                <button id="button1" class="apply-button" disabled>Apply</button>
+            </div>
+            <div class="bill-sub">
+                <span class="bill-sub1">Subtotal</span>
+                <span class="bill-sub2">$0</span>
+            </div>
+            <div class="bill-shipping">
+                <span class="bill-shipping1">Shipping</span>
+                <span class="bill-shipping2">Calculated at next step</span>
+            </div>
+            <div class="bill-total">
+                <span class="bill-total1">Total</span>
+                <span class="bill-total2">USD <strong>$0</strong></span>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="~/Content/MainPageResources/javascript/check-out.js"></script>
+    <script>
+        var personId = @Model.Person.Id;
+        console.log(personId);
+    </script>
+</body>
+</html>
+

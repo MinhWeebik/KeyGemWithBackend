@@ -1,0 +1,217 @@
+
+.h1{
+	position: relative;
+	font-family: "Futura",sans-serif;
+	margin-top: 140px;
+	margin-bottom: 16.6px ;
+	color: #e5e3db;
+	font-size: 20px;
+	letter-spacing: 5px;
+
+	}
+.p1{
+	font-family: "Futura",sans-serif;
+	color: #e5e3db;
+	font-size: 15px;
+	font-weight:500;
+	margin-bottom: 30px;
+}	
+.email-login{
+	position: relative;
+	display: inline-block;
+}
+.email-login input{
+  background: none;
+  color: rgb(229, 227, 219);
+  border-color: white;
+  border-style: solid;
+  border-width: 2.4px;
+  border-radius: 8px;
+  padding: 12px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  width: 390px;
+  margin-bottom: 18px;
+}
+.email-login input::placeholder{
+	color:rgb(212, 172, 55);
+	font-weight: 600;
+	font-size: 14px;
+}
+.email-login label{
+	opacity: 0;
+	position: absolute;
+}
+.email-login.has-value label {
+  opacity:1;
+  top:-10px;  
+  left: 11px;
+  font-size: 13px;
+  font-weight: 600;
+  color:#d4af37;
+  background-color:rgb(59,59,59) ;
+  padding:0 6px; 
+  transition: all 0.2s ease-in-out;
+}
+.password-login{
+	display: inline-block;
+	position: relative;
+}
+.password-login input{
+  background: none;
+  color: rgb(229, 227, 219);
+  border-color: white;
+  border-style: solid;
+  border-width: 2.4px;
+  border-radius: 8px;
+  padding: 12px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  width: 390px;
+  margin-bottom: 18px;
+}
+.password-login input::placeholder{
+	color:rgb(212, 172, 55);
+	font-weight: 600;
+	font-size: 14px;
+}
+.password-login.has-value2 label {
+  opacity:1;
+  top:-10px;  
+  left: 11px;
+  font-size: 13px;
+  font-weight: 600;
+  color:#d4af37;
+  background-color:rgb(59,59,59) ;
+  padding:0 6px; 
+  transition: all 0.2s ease-in-out;
+}
+.password-login label{
+	opacity: 0;
+	position: absolute;
+}
+.login-button .custom-button{
+  border-color: black;
+  border-style: solid;
+  border-width: 2.4px;
+  border-radius: 8px;
+  padding: 12px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  width: 392px;
+  margin-bottom: 18px;
+  letter-spacing: 2.4px;
+  cursor: pointer;
+  color:rgb(212, 172, 55);
+}
+.forgot-pass{
+	position: relative;
+}
+.forgot-password{
+	position: absolute;
+	right:15px;
+	top:11px;
+	font-size: 13px;
+	font-weight: 600;
+	color:rgb(212, 172, 55);
+	transition: 0.3s;
+	cursor: pointer;
+}
+.forgot-password:hover{
+	color: white;
+}
+.form-hint{
+	position: relative;
+}
+.p2{
+	font-family: "Futura",sans-serif;
+	color:rgb(212, 172, 55) ;
+	font-size: 15px;
+	font-weight: 500;
+	position: absolute;
+	top:0px;
+	left: 85px;
+}
+.create-acc{
+	font-family: "Futura",sans-serif;
+	color:rgb(229, 227, 219) ;
+	font-size: 15px;
+	font-weight: 500;
+	position: absolute;
+	top:0px;
+	right:85px;
+	transition: 0.3s;
+}
+.create-acc:hover{
+	color: rgb(212, 172, 55);
+}
+
+.main-body-login {
+	margin: auto;
+	width: 396px;
+	height: 336px;
+	margin-top: 180px;
+	margin-bottom: 120px;
+	text-align: center;
+}
+
+.error-message {
+	color: darkred;
+	background-color: rgba(243,204,204,255);
+	border-radius: 8px;
+	margin-bottom: 20px;
+	padding-top: 11px;
+	padding-bottom: 11px;
+	font-size: 14px;
+}
+
+.main-body-logged-in {
+	height: 336px;
+	margin-top: 180px;
+	margin-bottom: 120px;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	margin-left: 50px;
+	margin-right: 50px;
+}
+
+.main-body-logged-in-container {
+	display: flex;
+	align-items: start;
+	
+}
+
+.logged-in-left-side {
+	flex: 3;
+	padding-right: 70px;
+}
+
+.logged-in-right-side {
+	flex: 1;
+}
+
+.logged-in-desc
+{
+	margin-top: 20px;
+	margin-bottom: 40px;
+}
+
+.logged-in-info-header {
+	border-bottom: 0.5px solid #6B6A6A;
+	padding-bottom: 10px;
+	color: #6B6A6A;
+	margin-bottom: 25px;
+}
+
+.logged-in-info-item {
+	color: rgb(229, 227, 219);
+	margin-bottom: 5px;
+}
+
+.log-out {
+	color: rgb(212, 172, 55);
+	text-decoration: underline;
+	font-size: 18px;
+}
+

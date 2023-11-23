@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "OrderComplete";
+    Layout = "~/Views/Shared/_MainPageLayout.cshtml";
+}
+
+@section headSection
+{
+    <title>Thanks for ordering</title>
+    <link rel="stylesheet" href="~/Content/MainPageResources/css/order-complete/order-complete-body.css" />
+}
+
+
+<div class="order-complete-container">
+    <div class="order-complete-header">Thank you for your order</div>
+    <div class="order-complete-body">Your order have been placed and is being processed. You will receive an email with the order detail</div>
+    <a href="@Url.Action("Index","MainPage")" class="back-to-homepage">Back to homepage</a>
+</div>

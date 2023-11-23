@@ -1,0 +1,84 @@
+﻿
+@model KeyGem.ViewModel.MainPageLoginViewModel
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_MainPageLayout.cshtml";
+}
+
+
+@section headSection
+{
+    <title>Account</title>
+    <link rel="stylesheet" href="~/Content/MainPageResources/css/login/login-body.css" />
+}
+
+@if (Request.IsAuthenticated)
+{
+    <div class="main-body-logged-in">
+        @using (Html.BeginForm("MainPageLogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+        {
+            @Html.AntiForgeryToken()
+            <a href="javascript:document.getElementById('logoutForm').submit()" class="log-out">
+                log out
+            </a>
+        }
+            <div style="color: rgb(229, 227, 219); margin-top: 30px">
+                <h3 class="h3">YOUR ACCOUNT</h3>
+                <p class="logged-in-desc">View all your orders and manage your account information.</p>
+            </div>
+            <div class="main-body-logged-in-container">
+                <div class="logged-in-left-side">
+                    <p class="logged-in-info-header">ACCOUNT INFORMATION</p>
+                    <p class="logged-in-info-item">@Model.CurrentEmail</p>
+                </div>
+                <div class="logged-in-right-side">
+                    <p class="logged-in-info-header">USER INFORMATION</p>
+                    @if (Model.Person.Id == 0)
+                    {
+                        <p class="logged-in-info-item">No information.</p>
+                    }
+                    else
+                    {
+                        <p class="logged-in-info-item">@Model.Person.FirstName @Model.Person.LastName</p>
+                        <p class="logged-in-info-item">@Model.Person.Address</p>
+                        <p class="logged-in-info-item">@Model.Person.Phone</p>
+                    }
+                </div>
+            </div>
+    </div>
+}
+else
+{
+    <div class="main-body-login">
+        <h1 class="h1">LOGIN</h1>
+        <p class="p1">Please enter your e-mail and password:</p>
+        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl, isMainPage = true }, FormMethod.Post))
+        {
+            if (TempData["Error"] != null)
+            {
+                <div class="error-message">
+                    @TempData["Error"]
+                </div>
+            }
+            <div class="main-form email-login">
+                <input type="email" id="1" placeholder="Email" name="Email" value="@Model.Email" />
+                <label for="1">Email</label>
+            </div>
+            <div class="main-form forgot-pass password-login">
+                <input type="password" id="2" placeholder="Password" name="Password" value="@Model.Password" />
+                <label for="2"> Password </label>
+                <span class="forgot-password">Forgot password?</span>
+            </div>
+            <div class="login-button">
+                <button type="submit" class="custom-button">LOGIN</button>
+            </div>
+        }
+        <div class="form-hint">
+            <p class="p2">Don't have an account?</p>
+            <a href="@Url.Action("Register","MainPage")" class="create-acc">Create one</a>
+        </div>
+    </div>
+}
+
+<script src="~/Content/MainPageResources/javascript/login.js"></script>
+

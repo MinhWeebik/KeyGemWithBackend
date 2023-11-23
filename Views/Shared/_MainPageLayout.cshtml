@@ -1,0 +1,247 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    @RenderSection("headSection", false)
+    <link rel="icon" href="~/Content/MainPageResources/logos/main-logo.png" type="image/icon type" />
+    <link rel="stylesheet" href="~/Content/MainPageResources/css/product/products-header.css" />
+    <link rel="stylesheet" href="~/Content/MainPageResources/css/product/products-general.css" />
+    <link rel="stylesheet" href="~/Content/MainPageResources/css/product/products-footer.css" />
+    <link rel="stylesheet" href="~/Content/MainPageResources/css/product/products-body.css" />
+    <script type="text/javascript" src="~/Content/MainPageResources/javascript/jquery-3.6.4.js"></script>
+    <script src="~/Content/MainPageResources/javascript/product.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+    <div id="cart-background"
+         class="cart-background"
+         onclick="closeItem()"></div>
+    <div id="cart-nav" class="cart-nav">
+        <div class="cart-header">
+            <div class="cart-text-1">CART</div>
+            <button class="cart-close" onclick="closeCartNav()">
+                <img src="~/Content/MainPageResources/logos/x.png" class="close-image" />
+            </button>
+        </div>
+        <div class="cart-body"></div>
+        <div class="cart-footer">
+            <div class="add-order-note">Add Order Note</div>
+            <div class="shipping-info">Shipping & taxes calculated at checkout</div>
+            <button class="custom-button" onclick="location.href='@Url.Action("CheckOut", "MainPage")'">CHECKOUT &#8226; $ 0</button>
+        </div>
+    </div>
+    <div class="announcement-bar">
+        <a href="index.html" class="announcement-text">THE CURRENT UK ORDER MINIMUM IS 160 EURO.</a>
+    </div>
+    <div class="top-header">
+        <div id="header" class="header">
+            <div id="search-nav" class="search-nav">
+                <div class="search-bar">
+                    <img src="~/Content/MainPageResources/logos/search-icon.PNG" class="search-icon" />
+                    <input type="text" class="search-input" placeholder="SEARCH..." />
+                    <button class="close-button" onclick="closeSearchNav()">
+                        <img src="~/Content/MainPageResources/logos/x-2.PNG" class="close-icon" />
+                    </button>
+                </div>
+                <div class="search-result-container" id="search-result-container">
+                    <div class="search-result-header">
+                        <div class="search-result-amount">1 RESULT</div>
+                        <div class="search-result-viewall">VIEW ALL</div>
+                    </div>
+                    <div class="search-result-grid"></div>
+                </div>
+            </div>
+            <div class="left-section">
+                <div class="menu home-menu">
+                    <a href="@Url.Action("Index","MainPage")">HOME</a>
+                    <div class="line">
+                        <div class="line-animation"></div>
+                    </div>
+                </div>
+                <div class="shop-menu">
+                    SHOP
+                    <div class="menu-invisibleline"></div>
+                    <div class="shop-menu-container">
+                        <div class="menu-item">
+                            <a href="@Url.Action("AllProduct","MainPage")">All Products</a>
+                        </div>
+                        <div class="menu-item">SALE</div>
+                        <div class="menu-item">Group-Buys</div>
+                        <div class="menu-item-keyboard">
+                            Keyboards
+                            <div class="keyboard-invisibleline"></div>
+                            <div class="arrow">
+                                <img src="~/Content/MainPageResources/logos/pngwing.com.png" class="arrow-image" />
+                            </div>
+                            <div class="keyboard-menu">
+                                <div class="menu-item">Keychron</div>
+                                <div class="menu-item">IDOBAO</div>
+                                <div class="menu-item">Ducky</div>
+                                <div class="menu-item">Glorious</div>
+                            </div>
+                        </div>
+                        <div class="menu-item">Keycap Sets</div>
+                        <div class="menu-item-switch">
+                            Switches
+                            <div class="keyboard-invisibleline"></div>
+                            <div class="arrow">
+                                <img src="~/Content/MainPageResources/logos/pngwing.com.png" class="arrow-image" />
+                            </div>
+                            <div class="switch-menu">
+                                <div class="menu-item">Linear</div>
+                                <div class="menu-item">Tactile</div>
+                                <div class="menu-item">Silent</div>
+                                <div class="menu-item">Clicky</div>
+                                <div class="menu-item">Switch Testers</div>
+                                <div class="menu-item">Gazzew</div>
+                                <div class="menu-item">Gateron</div>
+                                <div class="menu-item">Kailh</div>
+                                <div class="menu-item">JWK</div>
+                                <div class="menu-item">SP-Star</div>
+                                <div class="menu-item">Tecsee</div>
+                                <div class="menu-item">CHERRY</div>
+                            </div>
+                        </div>
+                        <div class="menu-item">Stabilizer</div>
+                        <div class="menu-item-spring">
+                            Springs
+                            <div class="keyboard-invisibleline"></div>
+                            <div class="arrow">
+                                <img src="~/Content/MainPageResources/logos/pngwing.com.png" class="arrow-image" />
+                            </div>
+                            <div class="spring-menu">
+                                <div class="menu-item">SPRiT</div>
+                                <div class="menu-item">TX</div>
+                            </div>
+                        </div>
+                        <div class="menu-item">Lubricants</div>
+                        <div class="menu-item">Switch Films</div>
+                        <div class="menu-item">Cables</div>
+                        <div class="menu-item">Wrist Rest</div>
+                        <div class="menu-item">Tools</div>
+                        <div class="menu-item">Accessories</div>
+                        <div class="menu-item">Merchandise</div>
+                    </div>
+                </div>
+                <div class="info-menu">
+                    INFO
+                    <div class="menu-invisibleline"></div>
+                    <div class="info-menu-container">
+                        <div class="menu-item">News</div>
+                        <div class="menu-item">Group-Buys Updates</div>
+                        <div class="menu-item">Carrer</div>
+                        <div class="menu-item">
+                            <a href="shipping-policy.html">Shipping Policy</a>
+                        </div>
+                        <div class="menu-item"><a href="FAQ.html">FAQ</a></div>
+                        <div class="menu-item">
+                            <a href="Contactus.html">Contact Us</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="mini-menu">
+                    <i class="fa-solid fa-bars"
+                       style="color: #e5e3db"
+                       onclick="openMenu()"></i>
+                    <div class="mini-menu-container" id="mini-menu-container">
+                        <div class="mini-menu-header">
+                            <img src="~/Content/MainPageResources/logos/close-icon-2.PNG"
+                                 class="close-icon-2"
+                                 onclick="closeMenu()" />
+                        </div>
+                        <div class="mini-menu-body">
+                            <a href="index.html">
+                                <div class="mini-menu-item">HOME</div>
+                            </a>
+                            <a href="all-product-page1.html"><div class="mini-menu-item">ALL PRODUCTS</div></a>
+                            <div class="mini-menu-item item-info" onclick="openInfoMenu()">
+                                INFO
+                                <i class="fa-solid fa-angle-down" style="color: #e5e3db"></i>
+                                <div class="mini-info-item-container">
+                                    <div class="mini-info-item">Project Updates</div>
+                                    <div class="mini-info-item">Career</div>
+                                    <div class="mini-info-item">
+                                        <a href="shipping-policy.html">Shipping Policy</a>
+                                    </div>
+                                    <div class="mini-info-item"><a href="FAQ.html">FAQ</a></div>
+                                    <div class="mini-info-item">
+                                        <a href="Contactus.html">Contact Us</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mini-menu-account">
+                                <a href="@Url.Action("Login","MainPage")">Account</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="middle-section">
+                <a href="@Url.Action("Index","MainPage")">
+                    <img src="~/Content/MainPageResources/logos/logo.png" class="main-logo" />
+                </a>
+            </div>
+            <div class="right-section">
+                <img src="~/Content/MainPageResources/logos/discord-logo.png" class="discord-logo" />
+                <div class="menu"><a href="@Url.Action("Login","MainPage")">ACCOUNT</a></div>
+                <div class="menu" onclick="openSearchNav()">SEARCH</div>
+                <div class="menu-cart" onclick="openCartNav()">CART (0)</div>
+                <div class="mini-search" onclick="openSearchNav()">
+                    <i class="fa-solid fa-magnifying-glass" style="color: #e5e3db"></i>
+                </div>
+                <div class="mini-cart" onclick="openCartNav()">
+                    <i class="fa-solid fa-cart-shopping" style="color: #e5e3db"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-body">
+        @RenderBody()
+    </div>
+
+    <div class="footer">
+        <div class="footer-item-container">
+            <div class="footer-menu">
+                <div class="footer-menu-header-text">FOOTER MENU</div>
+                <div class="footer-menu-body-text">Legal Notice</div>
+                <div class="footer-menu-body-text">Privacy Policy</div>
+                <div class="footer-menu-body-text">Refund policy</div>
+                <div class="footer-menu-body-text">Terms of Service</div>
+                <div class="footer-menu-body-text">Shipping Policy</div>
+            </div>
+            <div class="reviews">
+                <div class="footer-menu-header-text">REVIEWS</div>
+                <div class="footer-menu-body-text">Trustpilot</div>
+                <div class="footer-menu-body-text">Google</div>
+            </div>
+            <div class="social-media">
+                <div class="footer-menu-header-text">SOCIAL MEDIA</div>
+                <div class="footer-menu-body-text">Join our Discord Community!</div>
+                <div class="social-media-item">
+                    <img src="~/Content/MainPageResources/logos/facebook-logo.PNG.png" class="facebook-logo" />
+                    <img src="~/Content/MainPageResources/logos/twitter-logo.png" class="twitter-logo" />
+                    <img src="~/Content/MainPageResources/logos/insta-logo.png" class="insta-logo" />
+                </div>
+            </div>
+            <div class="newsletter-section">
+                <div class="footer-menu-header-text">NEWSLETTER</div>
+                <div class="footer-menu-body-text">
+                    Subscribe to our newsletter to be always up to date
+                </div>
+                <input type="email"
+                       class="email-input"
+                       placeholder="Enter your email address" />
+                <button class="custom-button">SUBSCRIBE</button>
+            </div>
+        </div>
+        <div class="footer-menu-trademark">© KEYGEM 2020-2023</div>
+        <div class="payment-container">
+            <img src="~/Content/MainPageResources/logos/payment.png" class="payment-method" />
+        </div>
+    </div>
+    <script type="text/javascript" src="~/Content/MainPageResources/javascript/product-general.js"></script>
+    <script type="text/javascript" src="~/Content/MainPageResources/javascript/shopping-cart.js"></script>
+</body>
+</html>

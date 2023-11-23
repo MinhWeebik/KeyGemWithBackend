@@ -1,0 +1,168 @@
+.first-name{
+  position: relative;
+  display: inline-block;
+}
+.first-name input{
+  background: none;
+  color: rgb(229, 227, 219);
+  border-color: white;
+  border-style: solid;
+  border-width: 2.4px;
+  border-radius: 8px;
+  padding: 12px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  width: 392px;
+  margin-bottom: 18px;
+}
+.first-name label{
+  opacity: 0;
+  position: absolute;
+}
+.first-name input::placeholder{
+  color:#d4af37;
+  font-weight: 600;
+  font-size: 14px;
+}
+.first-name.has-value label {
+  opacity:1;
+  top:-10px;  
+  left: 11px;
+  font-size: 13px;
+  font-weight: 600;
+  color:#d4af37;
+  background-color:rgb(59,59,59) ;
+  padding:0 6px; 
+  transition: all 0.2s ease-in-out;
+}
+.last-name{
+  position: relative;
+  display: inline-block;
+}
+.last-name input{
+  background: none;
+  color: rgb(229, 227, 219);
+  border-color: white;
+  border-style: solid;
+  border-width: 2.4px;
+  border-radius: 8px;
+  padding: 12px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  width: 392px;
+  margin-bottom: 18px;
+}
+.last-name label{
+  opacity: 0;
+  position: absolute;
+}
+.last-name input::placeholder{
+	color:rgb(212, 172, 55);
+	font-weight: 600;
+	font-size: 14px;
+}
+.last-name.has-value2 label {
+  opacity:1;
+  top:-10px;  
+  left: 11px;
+  font-size: 13px;
+  font-weight: 600;
+  color:#d4af37;
+  background-color:rgb(59,59,59) ;
+  padding:0 6px; 
+  transition: all 0.2s ease-in-out;
+}
+.email-user{
+  position: relative;
+  display: inline-block;
+}
+.email-user input{
+  background: none;
+  color: rgb(229, 227, 219);
+  border-color: white;
+  border-style: solid;
+  border-width: 2.4px;
+  border-radius: 8px;
+  padding: 12px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  width: 392px;
+  margin-bottom: 18px;
+}
+.email-user label{
+  opacity: 0;
+  position: absolute;
+}
+.email-user input::placeholder{
+	color:rgb(212, 172, 55);
+	font-weight: 600;
+	font-size: 14px;
+}
+.email-user.has-value3 label {
+  opacity:1;
+  top:-10px;  
+  left: 11px;
+  font-size: 13px;
+  font-weight: 600;
+  color:#d4af37;
+  background-color:rgb(59,59,59) ;
+  padding:0 6px; 
+  transition: all 0.2s ease-in-out;
+}
+.password-create{
+  position: relative;
+  display: inline-block;
+}
+.password-create input{
+  background: none;
+  color: rgb(229, 227, 219);
+  border-color: white;
+  border-style: solid;
+  border-width: 2.4px;
+  border-radius: 8px;
+  padding: 12px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  width: 392px;
+  margin-bottom: 18px;
+}
+.password-create label{
+  opacity: 0;
+  position: absolute;
+}
+.password-create input::placeholder{
+	color:rgb(212, 172, 55);
+	font-weight: 600;
+	font-size: 14px;
+}
+.password-create.has-value4 label {
+  opacity:1;
+  top:-10px;  
+  left: 11px;
+  font-size: 13px;
+  font-weight: 600;
+  color:#d4af37;
+  background-color:rgb(59,59,59) ;
+  padding:0 6px; 
+  transition: all 0.2s ease-in-out;
+}
+.create-button .custom-button{
+  border-color: black;
+  border-style: solid;
+  border-width: 2.4px;
+  border-radius: 8px;
+  padding: 12px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  width: 392px;
+  margin-bottom: 18px;
+  letter-spacing: 2.4px;
+  cursor: pointer;
+  color:rgb(212, 172, 55);
+}
+
+
+.main-body-register {
+  margin: 150px;
+  text-align: center;
+}

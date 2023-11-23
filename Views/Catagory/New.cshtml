@@ -1,0 +1,53 @@
+﻿@model KeyGem.ViewModel.NewCatagoryViewModel
+@{
+    ViewBag.Title = "New";
+}
+
+<link rel="stylesheet" href="~/Content/toastr.css" />
+
+<div class="content-header">
+    <div class="container-fluid">
+        <h2>@Model.Title</h2>
+    </div>
+</div>
+@using (Html.BeginForm("Save", "Catagory"))
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.Catagory.Name)
+                @Html.TextBoxFor(m => m.Catagory.Name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Catagory.Name)
+            </div>
+        </div>
+
+        @Html.HiddenFor(m => m.Catagory.Id)
+
+    </div>
+    <button type="submit" class="btn btn-success" style="margin-top: 20px; padding-left: 30px; padding-right: 30px">Save</button>
+    <button type="button" class="btn btn-danger" style="margin-top: 20px; padding-left: 30px; padding-right: 30px" onclick="location.href='@Url.Action("Index", "Catagory")'">Cancel</button>
+}
+
+@section scripts
+{
+    <script src="~/AdminLte/plugins/ckeditor/ckeditor.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+    @if (TempData["CreateNewCatagorySuccess"] != null)
+    {
+        <script>
+            $(document).ready(function () {
+                toastr.success("Catagory successfully created");
+            });
+        </script>
+    }
+}
+<style>
+    .field-validation-error {
+        color: red;
+    }
+
+    .input-validation-error {
+        border: 2px solid red;
+    }
+</style>

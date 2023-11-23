@@ -1,0 +1,114 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<link rel="stylesheet" href="~/AdminLte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href=".~/AdminLte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+<link rel="stylesheet" href="~/AdminLte/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+<link rel="stylesheet" href="~/Content/toastr.css" />
+
+<div class="content-header">
+    <div class="container-fluid">
+        <h1>Catagory</h1>
+    </div>
+</div>
+
+<section class="content">
+    <div class="container-fluid">
+
+        <table id="catagory" class="table table-bordered table-hover display">
+            <thead>
+                <tr>
+                    <th>
+                        Catagory
+                    </th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <button class="btn btn-primary" style="margin-bottom: 50px" onclick="location.href='@Url.Action("New", "Catagory")'">
+            New Catagory
+        </button>
+    </div>
+</section>
+
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            var table = $("#catagory").DataTable({
+                ajax: {
+                    url: "/api/catagory/",
+                    dataSrc: ""
+                },
+                columns:
+                    [
+                        {
+                            data: "name"
+                        },
+                        {
+                            data: "id",
+                            render: function (data) {
+                                return "<button class='btn-success btn js-edit' data-catagory-id=" + data + ">Edit</button>"
+                            }
+                        },
+                        {
+                            data: "id",
+                            render: function (data) {
+                                return "<button class='btn-danger btn js-delete' data-catagory-id=" + data + ">Delete</button>"
+                            }
+                        }
+                    ]
+            });
+            $("#catagory").on("click", ".js-edit", function () {
+                var button = $(this);
+                window.location.href = "/catagory/edit/" + button.attr("data-catagory-id");
+            });
+
+            $("#catagory ").on("click", ".js-delete", function () {
+                var button = $(this);
+                bootbox.confirm("Are you sure you want to delete this catagory?", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/api/catagory/" + button.attr("data-catagory-id"),
+                            method: "DELETE",
+                            success: function () {
+                                table.row(button.parents("tr")).remove().draw();
+                                toastr.success("Catagory successfully deleted");
+                            },
+                            error: function () {
+                                toastr.error("The catagory you're trying to delete is linked to one or more product")
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+    @if (TempData["EditNewCatagorySuccess"] != null)
+    {
+        <script>
+            $(document).ready(function () {
+                toastr.success("Catagory successfully edited");
+            });
+        </script>
+    }
+    <script src="~/AdminLte/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/AdminLte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/AdminLte/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/AdminLte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="~/AdminLte/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/AdminLte/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="~/AdminLte/plugins/jszip/jszip.min.js"></script>
+    <script src="~/AdminLte/plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="~/AdminLte/plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="~/AdminLte/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="~/AdminLte/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="~/AdminLte/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+}
+
